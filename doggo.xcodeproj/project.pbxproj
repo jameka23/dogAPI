@@ -13,6 +13,7 @@
 		69BDF70226EDB55E001BEDF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BDF70026EDB55E001BEDF1 /* Main.storyboard */; };
 		69BDF70426EDB561001BEDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69BDF70326EDB561001BEDF1 /* Assets.xcassets */; };
 		69BDF70726EDB561001BEDF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BDF70526EDB561001BEDF1 /* LaunchScreen.storyboard */; };
+		69BDF71226EDB6EA001BEDF1 /* DogAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BDF71126EDB6EA001BEDF1 /* DogAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		69BDF70326EDB561001BEDF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69BDF70626EDB561001BEDF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69BDF70826EDB561001BEDF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69BDF71126EDB6EA001BEDF1 /* DogAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		69BDF70F26EDB5FA001BEDF1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				69BDF71126EDB6EA001BEDF1 /* DogAPI.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				69BDF6FF26EDB55E001BEDF1 /* ViewController.swift in Sources */,
 				69BDF6FB26EDB55E001BEDF1 /* AppDelegate.swift in Sources */,
 				69BDF6FD26EDB55E001BEDF1 /* SceneDelegate.swift in Sources */,
+				69BDF71226EDB6EA001BEDF1 /* DogAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
