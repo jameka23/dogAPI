@@ -13,6 +13,8 @@ class DogAPI {
         
         
         // computed property
+        // instead of having to create an instance of the URL every single time we create an URL, we can use it from the
+        // dog api
         var url : URL {
             return URL(string: self.rawValue)! // never force unwrap but this is a guaranteed working url
         }

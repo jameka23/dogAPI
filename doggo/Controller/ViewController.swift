@@ -13,6 +13,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let randomImageEndpoint = DogAPI.Endpoint.randomImageFromAllDogsCollection.url
+        
+        let task = URLSession.shared.dataTask(with: randomImageEndpoint) { data, response, error in
+            //the response or error is returned
+            
+            guard let data = data else {
+                return
+            }
+            
+            print(data)
+            
+        }
+        task.resume()
     }
 
 
