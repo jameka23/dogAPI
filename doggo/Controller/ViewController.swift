@@ -29,8 +29,11 @@ class ViewController: UIViewController {
             // json serialization using a do/catch
             
             do {
+                //cast as a dictionary with <string,any>
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
                 
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let url = json["message"] as! String
+                print(url)
             
             } catch {
                 print("there was an error")
