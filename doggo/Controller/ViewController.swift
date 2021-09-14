@@ -25,6 +25,18 @@ class ViewController: UIViewController {
             
             print(data)
             
+            
+            // json serialization using a do/catch
+            
+            do {
+                
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+            
+            } catch {
+                print("there was an error")
+            }
+            
+            
         }
         task.resume()
     }
