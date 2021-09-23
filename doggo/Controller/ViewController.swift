@@ -28,16 +28,20 @@ class ViewController: UIViewController {
             
             // json serialization using a do/catch
             
-            do {
-                //cast as a dictionary with <string,any>
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-                
-                let url = json["message"] as! String
-                print(url)
+//            do {
+//                //cast as a dictionary with <string,any>
+//                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+//
+//                let url = json["message"] as! String
+//                print(url)
+//
+//            } catch {
+//                print("there was an error")
+//            }
             
-            } catch {
-                print("there was an error")
-            }
+            // using the decoder to convert json into swift struct
+            let decoder = JSONDecoder()
+            let imageData = try! decoder.decode(DogImage.self, from: data)
             
             
         }
