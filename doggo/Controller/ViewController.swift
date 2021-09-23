@@ -23,7 +23,7 @@ class ViewController: UIViewController {
                 return
             }
             
-            print(data)
+            
             
             
             // json serialization using a do/catch
@@ -43,7 +43,23 @@ class ViewController: UIViewController {
             let decoder = JSONDecoder()
             let imageData = try! decoder.decode(DogImage.self, from: data)
             
+            guard let message = URL(string: imageData.message) else { return }
             
+            let task = URLSession.shared.dataTask(with: message) { imgData, response, error in
+                guard let imgData = imgData else {
+                    return
+                }
+                
+                
+                print("The image data has \(imgData)")
+                
+                let downloadedImage = UIImage(data: imgData)
+                // we can only update the UI on the MAIN thread by dispatching that work on to the main thread
+                DispatchQueue.main.async {
+                    self.imageView.image = downloadedImage
+                }
+            }
+            task.resume()
         }
         task.resume()
     }
