@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DogAPI {
     enum Endpoint: String {
@@ -19,5 +20,26 @@ class DogAPI {
             return URL(string: self.rawValue)! // never force unwrap but this is a guaranteed working url
         }
     }
+    
+    // mark as a class bc we dont nee and instance of dogapi in order to use it
+    // also can't return a value since it's a class func so we can pass in a
+    // (closure) to get a value back to the view controller are going to be parameters of the callback function
+    // mark as escaping because it is
+    class func requestImageFile(url: URL, completionHandler: @escaping (UIImage?, Error?) -> Void){
+        
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { (imgData, response, error) in
+            guard let imgData = imgData else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            let downloadedImage = UIImage(data: imgData)
+            completionHandler(downloadedImage, nil)
+        })
+        task.resume()
+    }
 }
+
+
+
 
