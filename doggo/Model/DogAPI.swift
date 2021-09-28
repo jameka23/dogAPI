@@ -21,6 +21,27 @@ class DogAPI {
         }
     }
     
+    // mark as escaping because the completion will be called once the function is finished executing
+    class func requestRandomImage(completionHandler: @escaping (DogImage?, Error?) -> Void){
+        let randomImageEndpoint = DogAPI.Endpoint.randomImageFromAllDogsCollection.url
+        
+        let task = URLSession.shared.dataTask(with: randomImageEndpoint) { data, response, error in
+            //the response or error is returned
+            
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            // using the decoder to convert json into swift struct
+            let decoder = JSONDecoder()
+            let imageData = try! decoder.decode(DogImage.self, from: data)
+            completionHandler(imageData,nil)
+        }
+        task.resume()
+    }
+    
+    
     // mark as a class bc we dont nee and instance of dogapi in order to use it
     // also can't return a value since it's a class func so we can pass in a
     // (closure) to get a value back to the view controller are going to be parameters of the callback function
