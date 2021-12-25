@@ -29,14 +29,14 @@ class DogAPI {
             //the response or error is returned
             
             guard let data = data else {
-                completionHandler(nil, error)
+                completionHandler(nil, error) // return the error since somehting happened
                 return
             }
             
             // using the decoder to convert json into swift struct
             let decoder = JSONDecoder()
             let imageData = try! decoder.decode(DogImage.self, from: data)
-            completionHandler(imageData,nil)
+            completionHandler(imageData,nil) // return the image since there was no error
         }
         task.resume()
     }
