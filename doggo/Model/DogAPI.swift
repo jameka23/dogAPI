@@ -13,13 +13,14 @@ class DogAPI {
     enum Endpoint {
         case randomImageFromAllDogsCollection
         case randomImageFromBreed(String)
+        case listAllBreedsCollection
         
         
         // computed property
         // instead of having to create an instance of the URL every single time we create an URL, we can use it from the
         // dog api
         var url : URL {
-            return URL(string: self.rawValue)! // never force unwrap but this is a guaranteed working url
+            return URL(string: self.stringValue)! // never force unwrap but this is a guaranteed working url
         }
         
         var stringValue: String {
@@ -28,11 +29,12 @@ class DogAPI {
                 return "https://dog.ceo/api/breeds/image/random"
             case .randomImageFromBreed(let breed):
                 return "https://dog.ceo/api/breed/\(breed)/images/random"
-            default:
-                print(Error)
-            }
+            case .listAllBreedsCollection:
+                return "https://dog.ceo/api/breeds/list/all"
+
         }
     }
+}
     
     // mark as escaping because the completion will be called once the function is finished executing
     class func requestRandomImage(breed: String, completionHandler: @escaping (DogImage?, Error?) -> Void){
@@ -54,7 +56,6 @@ class DogAPI {
         task.resume()
     }
     
-    
     // mark as a class bc we dont nee and instance of dogapi in order to use it
     // also can't return a value since it's a class func so we can pass in a
     // (closure) to get a value back to the view controller are going to be parameters of the callback function
@@ -72,8 +73,34 @@ class DogAPI {
         })
         task.resume()
     }
+    
+    
+    
+    class func requestAllBreeds(completionHandler: @escaping ([String], Error?) -> Void){
+       // get the endpoint
+        let allBreedsEndpoint = DogAPI.Endpoint.listAllBreedsCollection.url
+        
+        let task = URLSession.shared.dataTask(with: allBreedsEndpoint) { data, response, error in
+            
+            guard let data = data else {
+                completionHandler([], error)
+                return
+            }
+            
+            
+            let decoder = JSONDecoder()
+            do {
+                let breedsResponse = try decoder.decode(BreedsListResponse.self, from: data)
+                
+                let breeds = breedsResponse.message.keys.map({$0})
+                completionHandler(breeds, nil)
+                
+            } catch  {
+                print(error)
+            }
+
+        }
+        
+        task.resume()
+    }
 }
-
-
-
-

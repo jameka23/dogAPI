@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var imageView: UIImageView!
     
-    let breeds: [String] = ["greyhound", "poodle"]
+    var breeds: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -21,6 +21,18 @@ class ViewController: UIViewController {
         pickerView.dataSource = self
         
         
+        //get all the breeds before loading
+        DogAPI.requestAllBreeds(completionHandler: handleAllBreedsRequest(breeds:error:))
+        
+    }
+    
+    func handleAllBreedsRequest(breeds: [String], error: Error?){
+        self.breeds = breeds
+        
+        // since we need to update the UI, it has to be on the main thread
+        DispatchQueue.main.async {
+            self.pickerView.reloadAllComponents()
+        }
     }
     
     func handleRandomImageRequest(imageData:DogImage?, error:Error?){
